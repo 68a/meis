@@ -1,0 +1,8 @@
+var mongoose = require('mongoose');
+
+
+var fs = require('fs-extra');
+
+exports.postImage = function(req, res) {
+    console.log(req);
+};

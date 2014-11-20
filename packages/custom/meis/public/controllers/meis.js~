@@ -1,0 +1,25 @@
+'use strict';
+
+angular.module('mean.meis', ['angularFileUpload'])
+    .controller(
+	'MeisController',
+	['$scope', 'Global', 'Meis',
+	 'FileUploader',
+	 function($scope, Global, Meis, FileUploader) {
+	     $scope.global = Global;
+	     $scope.uploader = new FileUploader( {
+		 url: '/upload',
+		 method: 'POST'
+	     });
+	     $scope.create = function(isValid) {
+		 if (isValid) {
+		     console.log($scope.uploader.queue);
+		 } else {
+		     $scope.submitted = true;
+		 }
+	     };
+	     $scope.package = {
+		 name: 'meis'
+	     };
+	 }
+	]);
