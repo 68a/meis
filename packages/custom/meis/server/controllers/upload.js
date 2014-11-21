@@ -43,20 +43,20 @@ exports.postImage = function(req, res) {
 
 	console.log(files[0][1].path);
 
-    	var tmpPath = files[0][1].path;
+    	// var tmpPath = files[0][1].path;
 
-	var tmpImages = new TmpImages();
+	// var tmpImages = new TmpImages();
 
 	
-	TmpImages.findOne({ 'username': user }, 'username images', function (err, tp) {
-	    if (err) return handleError(err);
+	// TmpImages.findOne({ 'username': user }, 'username images', function (err, tp) {
+	//     if (err) return handleError(err);
 
-	    image = fs.readFileSync(tmpPath);
+	//     image = fs.readFileSync(tmpPath);
 
-    	    tp.images.files.push(image);
-	    tp.save();
+    	//     tp.images.files.push(image);
+	//     tp.save();
 
-	});
+	// });
 
     });
 };			

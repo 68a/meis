@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.title.$invalid }">
-      <label mean-token="'create-uname'" class="col-md-3 control-label">QQ</label>
+      <label mean-token="'create-uname'" class="col-md-3 control-label">Email</label>
       <div class="col-md-9">
         <input name="uname" type="text" class="form-control" data-ng-model="uname" id="uname" placeholder="UName" required>
         <div ng-show="submitted && articleForm.uname.$invalid" class="help-block">
@@ -24,11 +24,11 @@
     <table class="table">
       <thead>
         <tr>
-          <th width="50%">Name</th>
-          <th ng-show="uploader.isHTML5">Size</th>
-          <th ng-show="uploader.isHTML5">Progress</th>
-          <th>Status</th>
-          <th>Actions</th>
+          <th width="50%"></th>
+          <th ng-show="uploader.isHTML5"></th>
+          <th ng-show="uploader.isHTML5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

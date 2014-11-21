@@ -27,15 +27,23 @@ angular.module('mean.meis', ['angularFileUpload'])
 
 	     $scope.create = function(isValid) {
 		 if (isValid) {
+
 		     var meis =
 			 {
 			     'name': $scope.name,
 			     'images': $scope.files,
-			     'comment': $scope.comment
+			     'comment': $scope.comment,
+			     'user': $scope.global.user.name
 			 };
+		     console.log('user:' + $scope.global.user.name);
+		     $http.post('/postimages', meis). success(function(data, status, headers, config) {
+			 console.log('success');
+		     }).
+			 error(function(data, status, headers, config) {
+			     console.log('error');
+
+			 });;
 		     
-		     $http.post('/postimages', meis);
-			 
 
 		 } else {
 		     $scope.submitted = true;
@@ -43,4 +51,4 @@ angular.module('mean.meis', ['angularFileUpload'])
 	     };
 
 	 }
-		     ]);
+	]);
