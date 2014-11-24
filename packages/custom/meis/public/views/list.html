@@ -1,0 +1,22 @@
+<section data-ng-controller="MeisController" data-ng-init="find()">
+  <ul class="unstyled">
+    <li data-ng-repeat="mei in meis">
+      <span>{{mei.created | date:'medium'}}</span> /
+      <span>{{mei.user.name}}</span>
+      <h2>
+        <a data-ng-href="#!/meis/{{mei._id}}">{{mei.name}}</a>
+        <span data-ng-if="hasAuthorization(mei)">
+          <a class="btn" href="/#!/meis/{{mei._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+          <a class="btn" data-ng-click="remove(mei);">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </span>
+      </h2>
+      <div>{{mei.comments.posts[0].comment}}</div>
+      <div><img src="data:image/png;base64,{{mei.images.files[0].image}}"</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!meis || meis.length">No meis yet. <br> Why don't you <a href="/#!/meis/create">Create One</a>?</h1>
+</section>
