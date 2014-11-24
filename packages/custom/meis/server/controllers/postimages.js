@@ -16,6 +16,7 @@ exports.postImages = function(req, res) {
 	meis.images.files.push({'user':user, 'image': image});
     }
     meis.comments.posts.push({'user':user, 'comment': comment});
+    meis.user = req.user;
     meis.save(function(err) {
 	if (err) {
 	    console.error(err);

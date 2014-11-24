@@ -18,15 +18,15 @@ Meis.register(function(app, auth, database) {
 
   //We are adding a link to the main menu for all authenticated users
   Meis.menus.add({
-    title: 'meis example page',
-    link: 'meis example page',
+    title: 'Meis',
+    link: 'all meis',
     roles: ['authenticated'],
-      menu: 'main',
-      dropdown: [{
-	  title: 'meis create',
-	  link: 'create meis',
-	  roles: ['authenticated'],
-      }]
+  });
+
+  Meis.menus.add({
+    title: 'Create New Mei',
+    link: 'create mei',
+    roles: ['authenticated'],
   });
 
   

@@ -25,6 +25,10 @@ var validateUniqueEmail = function(value, callback) {
  */
 
 var MeiSchema = new Schema({
+    created: {
+	type: Date,
+	default: Date.now
+    },
     name: {
 	type: String,
 	unique: true,
@@ -35,6 +39,10 @@ var MeiSchema = new Schema({
     },
     comments: {
 	posts: []
+    },
+    user: {
+	type: Schema.ObjectId,
+	ref: 'User'
     },
     provider: {
 	type: String,

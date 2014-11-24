@@ -3,11 +3,11 @@
 angular.module('mean.meis')
     .config(['$stateProvider',
 	     function($stateProvider) {
-		 $stateProvider.state('meis example page', {
-		     url: '/meis/example',
-		     templateUrl: 'meis/views/index.html'
+		 $stateProvider.state('all meis', {
+		     url: '/meis/list',
+		     templateUrl: 'meis/views/list.html'
 		 })
-		     .state('create meis', {
+		     .state('create mei', {
 			 url: '/meis/create',
 			 templateUrl: 'meis/views/create.html'
 		     });

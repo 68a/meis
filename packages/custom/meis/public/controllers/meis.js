@@ -49,6 +49,21 @@ angular.module('mean.meis', ['angularFileUpload'])
 		     $scope.submitted = true;
 		 }
 	     };
+	     $scope.find = function() {
+
+		 Meis.query(function(meis) {
+		     $scope.meis = meis;
+
+		 });
+	     };
+
+	     $scope.findOne = function() {
+		 Meis.get({
+		     meiId: $stateParams.meiId
+		 }, function(mei) {
+		     $scope.mei = mei;
+		 });
+	     };
 
 	 }
 	]);

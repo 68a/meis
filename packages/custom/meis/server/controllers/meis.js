@@ -4,92 +4,92 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  Meis = mongoose.model('Mei'),
+  Mei = mongoose.model('Mei'),
   _ = require('lodash');
 
 
 /**
  * Find meis by id
  */
-exports.meis = function(req, res, next, id) {
-  Meis.load(id, function(err, meis) {
+exports.mei = function(req, res, next, id) {
+  Mei.load(id, function(err, mei) {
     if (err) return next(err);
-    if (!meis) return next(new Error('Failed to load meis ' + id));
-    req.meis = meis;
+    if (!mei) return next(new Error('Failed to load mei ' + id));
+    req.mei = mei;
     next();
   });
 };
 
 /**
- * Create an meis
+ * Create an mei
  */
 exports.create = function(req, res) {
-  var meis = new Meis(req.body);
-    meis.user = req.user;
+  var mei = new Mei(req.body);
+    mei.user = req.user;
 
 
-  meis.save(function(err) {
+  mei.save(function(err) {
     if (err) {
       return res.json(500, {
-        error: 'Cannot save the meis'
+        error: 'Cannot save the mei'
       });
     }
-    res.json(meis);
+    res.json(mei);
 
   });
 };
 
 /**
- * Update an meis
+ * Update an mei
  */
 exports.update = function(req, res) {
-  var meis = req.meis;
+  var mei = req.mei;
 
-  meis = _.extend(meis, req.body);
+  mei = _.extend(mei, req.body);
 
-  meis.save(function(err) {
+  mei.save(function(err) {
     if (err) {
       return res.json(500, {
-        error: 'Cannot update the meis'
+        error: 'Cannot update the mei'
       });
     }
-    res.json(meis);
+    res.json(mei);
 
   });
 };
 
 /**
- * Delete an meis
+ * Delete an mei
  */
 exports.destroy = function(req, res) {
-  var meis = req.meis;
+  var mei = req.mei;
 
-  meis.remove(function(err) {
+  mei.remove(function(err) {
     if (err) {
       return res.json(500, {
-        error: 'Cannot delete the meis'
+        error: 'Cannot delete the mei'
       });
     }
-    res.json(meis);
+    res.json(mei);
 
   });
 };
 
 /**
- * Show an meis
+ * Show an mei
  */
 exports.show = function(req, res) {
-  res.json(req.meis);
+  res.json(req.mei);
 };
 
 /**
- * List of Meiss
+ * List of Meis
  */
 exports.all = function(req, res) {
-  Meis.find().sort('-created').populate('user', 'name username').exec(function(err, meiss) {
+  Mei.find().sort('-created').populate('user', 'name username').exec(function(err, meis) {
     if (err) {
       return res.json(500, {
-        error: 'Cannot list the meiss'
+        error: 'Cannot list the meis'
       });
     }
     res.json(meis);
