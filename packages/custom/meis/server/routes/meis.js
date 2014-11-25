@@ -2,6 +2,13 @@
 
 var meis = require('../controllers/meis');
 
+var hasAuthorization = function(req, res, next) {
+    if (!req.user.isAdmin && req.mei.user.id !== req.user.id) {
+	return res.send(401, 'User is not authorized');
+    }
+    next();
+};
+
 // The Package is past automatically as first parameter
 module.exports = function(Meis, app, auth, database) {
     var upload = require('../controllers/upload');
@@ -12,6 +19,12 @@ module.exports = function(Meis, app, auth, database) {
     app.route('/meis')
 	.get(meis.all)
 	.post(auth.requiresLogin, meis.create);
+
+    app.route('/meis/:meiId')
+	.get(meis.show)
+	.put(auth.requiresLogin, hasAuthorization, meis.update)
+	.delete(auth.requiresLogin, hasAuthorization, meis.destroy);
+    
 
     app.route('/postimages')
 	.post(postImages.postImages);
@@ -36,4 +49,5 @@ module.exports = function(Meis, app, auth, database) {
 	    res.send(html);
 	});
     });
+    app.param('meiId', meis.mei);
 };

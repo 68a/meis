@@ -60,4 +60,10 @@ MeiSchema.static.saveImage = function(images, cb) {
 MeiSchema.methods = {
 };
 
+MeiSchema.statics.load = function(id, cb) {
+  this.findOne({
+    _id: id
+  }).populate('user', 'name username').exec(cb);
+};
+
 mongoose.model('Mei', MeiSchema);

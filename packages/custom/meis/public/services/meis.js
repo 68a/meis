@@ -10,7 +10,7 @@
 angular.module('mean.meis').factory('Meis', ['$resource',
   function($resource) {
     return $resource('meis/:meiId', {
-      meisId: '@_id'
+      meiId: '@_id'
     }, {
       update: {
         method: 'PUT'

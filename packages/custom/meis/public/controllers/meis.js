@@ -58,12 +58,15 @@ angular.module('mean.meis', ['angularFileUpload'])
 	     };
 
 	     $scope.findOne = function() {
+		 console.log($stateParams.meiId);
 		 Meis.get({
 		     meiId: $stateParams.meiId
 		 }, function(mei) {
 		     $scope.mei = mei;
 		 });
 	     };
-
+	     $scope.search = function() {
+		 console.log('search....');
+	     }
 	 }
 	]);
