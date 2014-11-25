@@ -1,0 +1,17 @@
+<section data-ng-controller="MeisController" data-ng-init="findOne()">
+  <span>{{mei.created | date:'medium'}}</span> /
+  <span>{{mei.user.name}}</span>
+  <h2>{{mei.name}}</h2>
+  <div data-ng-if="hasAuthorization(mei)">
+    <a class="btn" href="/#!/meis/{{mei._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn" data-ng-click="remove(mei);">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+    <div>{{mei.comments.posts[0].comment}}</div>
+      <div ng-repeat="mi in mei.images.files"><img src="data:image/png;base64,{{mi.image}}"</div>
+
+  </div>
+  <div>{{mei.content}}</div>
+</section>
