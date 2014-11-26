@@ -5,8 +5,8 @@ angular.module('mean.meis', ['angularFileUpload'])
 	'MeisController',
 	['$scope', '$http', '$stateParams',
 	 '$location','Global', 'Meis',
-	 'FileUploader',
-	 function($scope, $http, $stateParams, $location, Global, Meis, FileUploader) {
+	 'FileUploader', 'Mm',
+	 function($scope, $http, $stateParams, $location, Global, Meis, FileUploader, Mm) {
 	     $scope.global = Global;
 	     $scope.files = [];
 	     $scope.uploader = new FileUploader( {
@@ -67,6 +67,10 @@ angular.module('mean.meis', ['angularFileUpload'])
 	     };
 	     $scope.search = function() {
 		 console.log('search....');
+		 Mm.search({ query:'aaa' },
+			   function(result){
+			       console.log('search result...');
+			   });
 	     }
 	 }
 	]);

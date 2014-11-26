@@ -13,6 +13,7 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(Meis, app, auth, database) {
     var upload = require('../controllers/upload');
     var postImages = require('../controllers/postimages');
+    var mm = require('../controllers/mm');
 
     app.route('/upload').post(upload.postImage);
 
@@ -25,6 +26,9 @@ module.exports = function(Meis, app, auth, database) {
 	.put(auth.requiresLogin, hasAuthorization, meis.update)
 	.delete(auth.requiresLogin, hasAuthorization, meis.destroy);
     
+    app.route('/mm/:query')
+	.get(mm.search);
+
 
     app.route('/postimages')
 	.post(postImages.postImages);
@@ -50,4 +54,5 @@ module.exports = function(Meis, app, auth, database) {
 	});
     });
     app.param('meiId', meis.mei);
+
 };

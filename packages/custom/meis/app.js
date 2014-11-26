@@ -29,6 +29,12 @@ Meis.register(function(app, auth, database) {
     roles: ['authenticated'],
   });
 
+   Meis.menus.add({
+    title: 'Search Mei',
+    link: 'search mei',
+    roles: ['authenticated'],
+  });
+
   
   Meis.aggregateAsset('css', 'meis.css');
 
