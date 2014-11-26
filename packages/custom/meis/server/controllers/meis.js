@@ -93,6 +93,7 @@ exports.all = function(req, res) {
         error: 'Cannot list the meis'
       });
     }
+      console.log(meis);
     res.json(meis);
 
   });

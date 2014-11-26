@@ -8,8 +8,9 @@ angular.module('mean.meis').factory('Mm', ['$resource',
       search: {
           method: 'GET',
 	  params:{
-
-	      query:'@query'}, isArray:true
+	      query:'@query' 
+	  },
+	  isArray:true
       }
     });
   }

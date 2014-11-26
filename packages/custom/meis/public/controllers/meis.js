@@ -14,10 +14,7 @@ angular.module('mean.meis', ['angularFileUpload'])
 		 method: 'POST'
 	     });
 	     $scope.uploader.onCompleteItem = function(fileItem, response, status, headers) {
-		 //console.info('onCompleteItem', fileItem, response, status, headers);
 		 $scope.files.push(response[0][1].path);
-		 console.info('on complete', response[0][1].path);
-		 console.info($scope.files);
              };
 
 	     $scope.hasAuthorization = function(article) {
@@ -35,7 +32,7 @@ angular.module('mean.meis', ['angularFileUpload'])
 			     'comment': $scope.comment,
 			     'user': $scope.global.user.name
 			 };
-		     console.log('user:' + $scope.global.user.name);
+
 		     $http.post('/postimages', meis). success(function(data, status, headers, config) {
 			 console.log('success');
 		     }).
@@ -66,10 +63,11 @@ angular.module('mean.meis', ['angularFileUpload'])
 		 });
 	     };
 	     $scope.search = function() {
-		 console.log('search....');
-		 Mm.search({ query:'aaa' },
+		 console.log('search....', $scope.searchString);
+		 Mm.search({ query: $scope.searchString },
 			   function(result){
-			       console.log('search result...');
+			       $scope.meis = result;
+			       console.log('search result...',result);
 			   });
 	     }
 	 }
