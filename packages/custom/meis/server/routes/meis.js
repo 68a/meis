@@ -14,6 +14,7 @@ module.exports = function(Meis, app, auth, database) {
     var upload = require('../controllers/upload');
     var postImages = require('../controllers/postimages');
     var mm = require('../controllers/mm');
+    var appendMei = require('../controllers/appendmei');
 
     app.route('/upload').post(upload.postImage);
 
@@ -29,9 +30,11 @@ module.exports = function(Meis, app, auth, database) {
     app.route('/mm/:query')
 	.get(mm.search);
 
-
     app.route('/postimages')
 	.post(postImages.postImages);
+
+    app.route('/appendmei')
+	.post(appendMei.appendMei);
 
     app.get('/meis/example/anyone', function(req, res, next) {
 	res.send('Anyone can access this');

@@ -15,7 +15,7 @@
         </span>
       </h2>
       <div>{{mei.comments.posts[0].comment}}</div>
-      <div ng-repeat="mi in mei.images.files"><img src="data:image/png;base64,{{mi.image}}"</div>
+      <div ng-repeat="mi in mei.images.files"><img src="data:image/png;base64,{{mi.image}}" /></div>
     </li>
   </ul>
   <h1 data-ng-hide="!meis || meis.length">No meis yet. <br> Why don't you <a href="/#!/meis/create">Create One</a>?</h1>

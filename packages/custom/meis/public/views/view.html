@@ -9,9 +9,9 @@
     <a class="btn" data-ng-click="remove(mei);">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
-    <div>{{mei.comments.posts[0].comment}}</div>
-      <div ng-repeat="mi in mei.images.files"><img src="data:image/png;base64,{{mi.image}}"</div>
 
+    <div ng-repeat="mi in mei.images.files"><img src="data:image/png;base64,{{mi.image}}"/>
+    </div>
+    <div ng-repeat="p in mei.comments.posts">{{p.comment}} {{p.user}}</div>
   </div>
-  <div>{{mei.content}}</div>
 </section>

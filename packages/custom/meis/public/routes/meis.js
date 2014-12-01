@@ -30,6 +30,14 @@ angular.module('mean.meis')
 			 url: '/meis/create',
 			 templateUrl: 'meis/views/create.html'
 		     })
+		     .state('edit mei', {
+			 url: '/meis/:meiId/edit',
+			 templateUrl: 'meis/views/edit.html',
+			 resolve: {
+			     loggedin: checkLoggedin
+			 }
+		     })
+
 		     .state('search mei', {
 			 url: '/meis/search',
 			 templateUrl: 'meis/views/search.html'

@@ -1,35 +1,41 @@
 <section data-ng-controller="MeisController" data-ng-init="search()">
-  <form name="searchForm" class="form-horizontal col-md-6" role="form" data-ng-submit="search()">
+  <form name="searchForm" class="row form-horizontal col-md-6" role="form" data-ng-submit="search()">
     <div class="form-group">
-      <label mean-token="'search'" class="col-md-3 control-label">Search</label>
-      <div class="col-md-9">
-	<input name="search-string" type="text" class="form-control" ng-model="searchString" id="search-string" />
+      <div class="row">
+	<div class="col-md-2">
+	  <label mean-token="'search'" class="control-label">Search</label>
+	</div>
+	<div class="col-md-7">
+	  <input name="search-string" type="text" class="form-control" ng-model="searchString" id="search-string" />
+	</div>
+	<div class="col-md-3">
+	  <button mean-token="create-submit'" type="submit" class="btn btn-info">Submit</button>
+	</div>
       </div>
+
     </div>
+
+
     <div class="form-group">
-      <div class="col-md-offset-3 col-md-9">
-	<button mean-token="'create-submit'" type="submit" class="btn btn-info">Submit</button>
-      </div>
+      <ul class="unstyled">
+	<li data-ng-repeat="mei in meis">
+	  <span>{{mei.created | date:'medium'}}</span> /
+	  <span>{{mei.user.name}}</span>
+	  <h2>
+            <a data-ng-href="#!/meis/{{mei._id}}">{{mei.name}}</a>
+            <span data-ng-if="hasAuthorization(mei)">
+              <a class="btn" href="/#!/meis/{{mei._id}}/edit">
+		<i class="glyphicon glyphicon-edit"></i>
+              </a>
+              <a class="btn" data-ng-click="remove(mei);">
+		<i class="glyphicon glyphicon-trash"></i>
+              </a>
+            </span>
+	  </h2>
+	  <div>{{mei.comments.posts[0].comment}}</div>
+	  <div ng-repeat="mi in mei.images.files"><img src="data:image/png;base64,{{mi.image}}"</div>
+						       </li>
+      </ul>
     </div>
   </form>
-    <ul class="unstyled">
-    <li data-ng-repeat="mei in meis">
-      <span>{{mei.created | date:'medium'}}</span> /
-      <span>{{mei.user.name}}</span>
-      <h2>
-        <a data-ng-href="#!/meis/{{mei._id}}">{{mei.name}}</a>
-        <span data-ng-if="hasAuthorization(mei)">
-          <a class="btn" href="/#!/meis/{{mei._id}}/edit">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn" data-ng-click="remove(mei);">
-            <i class="glyphicon glyphicon-trash"></i>
-          </a>
-        </span>
-      </h2>
-      <div>{{mei.comments.posts[0].comment}}</div>
-      <div ng-repeat="mi in mei.images.files"><img src="data:image/png;base64,{{mi.image}}"</div>
-    </li>
-  </ul>
-
 </section>

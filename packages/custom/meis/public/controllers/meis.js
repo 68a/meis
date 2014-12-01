@@ -35,12 +35,38 @@ angular.module('mean.meis', ['angularFileUpload'])
 
 		     $http.post('/postimages', meis). success(function(data, status, headers, config) {
 			 console.log('success');
+
 		     }).
 			 error(function(data, status, headers, config) {
 			     console.log('error');
 
 			 });;
-		     
+		     $location.path('meis/list');	     
+
+		 } else {
+		     $scope.submitted = true;
+		 }
+	     };
+	     $scope.append = function(isValid) {
+		 if (isValid) {
+
+		     var meis =
+			 {
+			     'name': $scope.mei.name,
+			     'images': $scope.files,
+			     'comment': $scope.comment,
+			     'user': $scope.global.user.name
+			 };
+		     console.log(meis);
+		     $http.post('/appendmei', meis). success(function(data, status, headers, config) {
+			 console.log('success');
+
+		     }).
+			 error(function(data, status, headers, config) {
+			     console.log('error');
+
+			 });;
+		     $location.path('meis/list');	     
 
 		 } else {
 		     $scope.submitted = true;
