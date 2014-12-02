@@ -14,6 +14,7 @@ angular.module('mean.meis', ['angularFileUpload'])
 		 method: 'POST'
 	     });
 	     $scope.uploader.onCompleteItem = function(fileItem, response, status, headers) {
+		 console.log(response);
 		 $scope.files.push(response[0][1].path);
              };
 
@@ -72,6 +73,23 @@ angular.module('mean.meis', ['angularFileUpload'])
 		     $scope.submitted = true;
 		 }
 	     };
+	     $scope.remove = function(mei) {
+		 if (mei) {
+		     mei.$remove(function(response) {
+			 for (var i in $scope.meis) {
+			     if ($scope.meis[i] === mei) {
+				 $scope.meis.splice(i, 1);
+			     }
+			 }
+			 $location.path('meis/list');
+		     });
+		 } else {
+		     $scope.mei.$remove(function(response) {
+			 $location.path('meis/list');
+		     });
+		 }
+	     };
+
 	     $scope.find = function() {
 
 		 Meis.query(function(meis) {
@@ -97,4 +115,4 @@ angular.module('mean.meis', ['angularFileUpload'])
 			   });
 	     }
 	 }
-	]);
+			 ]);
