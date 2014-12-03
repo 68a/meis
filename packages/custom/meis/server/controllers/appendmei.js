@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Meis = mongoose.model('Mei');
-var fs = require('fs-extra');
 var gm = require('gm').subClass({ imageMagick: true });
+var pt = require('./processthumb.js');
 
 exports.appendMei = function(req, res) {
     console.log("---append mei---", req.body);
@@ -27,27 +27,8 @@ exports.appendMei = function(req, res) {
 		});
 	    }
 	    else {
-		var count = images.length;
-		for (var im in images) {
-
-		    gm(images[im]).resize(240,240).toBuffer(function (err, buffer) {
-			
-			if (err) return handle(err);
-
-			meis.images.files.push({'user':user, 'image': buffer});
-			count = count - 1;
-
-			if (count == 0) {
-			    Meis.update({'name': name}, meis.toObject(), function(err) {
-				if (err) res.sendStatus(500, err);
-				else
-				    res.sendStatus(200);
-				
-			    });
-			}
-		    });
-		}
+		pt.processThumbnailAndImage(user, name, images, meis, res, Meis, pt.appendImagesAndThumbnails);
 	    }
 	}
     });
-};
+}
