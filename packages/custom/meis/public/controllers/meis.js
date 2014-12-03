@@ -36,13 +36,13 @@ angular.module('mean.meis', ['angularFileUpload'])
 
 		     $http.post('/postimages', meis). success(function(data, status, headers, config) {
 			 console.log('success');
-
+			 $location.path('meis/list');	     
 		     }).
 			 error(function(data, status, headers, config) {
 			     console.log('error');
-
+			     $location.path('meis/list');	     
 			 });;
-		     $location.path('meis/list');	     
+
 
 		 } else {
 		     $scope.submitted = true;
@@ -61,13 +61,13 @@ angular.module('mean.meis', ['angularFileUpload'])
 		     console.log(meis);
 		     $http.post('/appendmei', meis). success(function(data, status, headers, config) {
 			 console.log('success');
-
+			 $location.path('meis/list');	     
 		     }).
 			 error(function(data, status, headers, config) {
 			     console.log('error');
+			     $location.path('meis/list');	     
 
 			 });;
-		     $location.path('meis/list');	     
 
 		 } else {
 		     $scope.submitted = true;
