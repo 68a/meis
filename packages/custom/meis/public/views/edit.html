@@ -5,9 +5,10 @@
     <h2>
       <a data-ng-href="#!/meis/{{mei._id}}" >{{mei.name}}</a>
     </h2>
-
-    <div ng-repeat="mi in mei.images.files">
-      <img src="data:image/png;base64,{{mi.image}}" />
+    <div class="row">
+      <div class="col-md-2" ng-repeat="mi in mei.images.files">
+	<img src="data:image/png;base64,{{mi.image_thumb}}" />
+      </div>
     </div>
     <div data-ng-if="hasAuthorization(mei)">
       <a class="btn" href="/#!/meis/{{mei._id}}/edit">

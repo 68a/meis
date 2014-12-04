@@ -4,7 +4,7 @@ var Meis = mongoose.model('Mei');
 
 var pt = require('./processthumb.js');
 
-var saveImagesAndThumbnails = function (meis, res, Meis) {
+var saveImagesAndThumbnails = function (name, meis, res, Meis) {
     meis.save(function(err) {
 	if (err) {
 	    console.error(err);
@@ -18,7 +18,6 @@ var saveImagesAndThumbnails = function (meis, res, Meis) {
 }
 
 exports.postImages = function(req, res) {
-    console.log("---postImage---", req.body);
     var name = req.body.name;
     var images = req.body.images;
     var comment = req.body.comment;
@@ -26,13 +25,11 @@ exports.postImages = function(req, res) {
     var meis = new Meis();
     meis.name = name;
     meis.user = req.user;
-    console.log('meis:', meis);
 
     meis.comments.posts.push({'user':user, 'comment': comment});
     if (images.length == 0) {
 	meis.save(function(err) {
 	    if (err) {
-		console.error(err);
 		res.sendStatus(500);
 	    }
 	    else {

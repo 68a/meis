@@ -114,5 +114,8 @@ angular.module('mean.meis', ['angularFileUpload'])
 			       console.log('search result...',result);
 			   });
 	     }
+	     $scope.showImage = function(img) {
+		 ngDialog.open({template: 'image_dialog.html'});
+	     }
 	 }
 			 ]);

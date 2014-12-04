@@ -17,7 +17,7 @@ exports.processThumbnailAndImage = function (user, name,  images, meis, res, Mei
 	    for(var i = 0; i < max_len; i++) {
 		meis.images.files.push({'user':user, 'image': n[i].image, 'image_thumb': t[i].image});
 	    }
-	    func(meis, res, Meis);
+	    func(name, meis, res, Meis);
 	}
     }
     var normal_images = [];
@@ -33,15 +33,15 @@ exports.processThumbnailAndImage = function (user, name,  images, meis, res, Mei
 		    .size(function (err, data) {
 			if (!err) console.log(data)
 		    });
-		gm(images[idx]).resize(64,64).toBuffer(function (err, buffer) {
+		gm(images[idx]).resize(240, 240, '^')
+		     .gravity('Center')
+		    .crop('240', '240')
+		    .toBuffer(function (err, buffer) {
 		    t.push({'index': idx, 'image': buffer});
-		    console.log('im:', im, '->idx:',idx);
 		    getThumbnailAndImage(images.length, idx, t, n, func);
 		});
 		gm(images[idx]).toBuffer(function(err, buffer){
 		    n.push({'index': idx, 'image': buffer});
-		    console.log('max_len:', images.length, '-->idx:',idx, 't.length:', t.length, 'n.length:', n.length);
-
 		    getThumbnailAndImage(images.length, idx, t, n, func);
 		});
 	    });

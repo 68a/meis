@@ -3,7 +3,7 @@ var Meis = mongoose.model('Mei');
 var gm = require('gm').subClass({ imageMagick: true });
 var pt = require('./processthumb.js');
 
-var appendImagesAndThumbnails = function(meis, res, Meis) {
+var appendImagesAndThumbnails = function(name, meis, res, Meis) {
     Meis.update({'name': name}, meis.toObject(), function(err) {
 	if (err) {
 	    console.error(err);
@@ -17,7 +17,6 @@ var appendImagesAndThumbnails = function(meis, res, Meis) {
 }
 
 exports.appendMei = function(req, res) {
-    console.log("---append mei---", req.body);
     var name = req.body.name;
     var images = req.body.images;
     var comment = req.body.comment;
