@@ -4,6 +4,19 @@ var Meis = mongoose.model('Mei');
 
 var pt = require('./processthumb.js');
 
+var saveImagesAndThumbnails = function (meis, res, Meis) {
+    meis.save(function(err) {
+	if (err) {
+	    console.error(err);
+	    res.sendStatus(500);
+	}
+	else {
+	    res.sendStatus(200);
+	}
+    });
+    
+}
+
 exports.postImages = function(req, res) {
     console.log("---postImage---", req.body);
     var name = req.body.name;
@@ -28,7 +41,7 @@ exports.postImages = function(req, res) {
 	});
     }
     else {
-	pt.processThumbnailAndImage(user, name, images, meis, res, Meis, pt.saveImagesAndThumbnails);
+	pt.processThumbnailAndImage(user, name, images, meis, res, Meis, saveImagesAndThumbnails);
     }
     
 };

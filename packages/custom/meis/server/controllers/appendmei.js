@@ -3,6 +3,19 @@ var Meis = mongoose.model('Mei');
 var gm = require('gm').subClass({ imageMagick: true });
 var pt = require('./processthumb.js');
 
+var appendImagesAndThumbnails = function(meis, res, Meis) {
+    Meis.update({'name': name}, meis.toObject(), function(err) {
+	if (err) {
+	    console.error(err);
+	    res.sendStatus(500);
+	}
+	else {
+	    res.sendStatus(200);
+	}
+    });
+    
+}
+
 exports.appendMei = function(req, res) {
     console.log("---append mei---", req.body);
     var name = req.body.name;
@@ -27,7 +40,7 @@ exports.appendMei = function(req, res) {
 		});
 	    }
 	    else {
-		pt.processThumbnailAndImage(user, name, images, meis, res, Meis, pt.appendImagesAndThumbnails);
+		pt.processThumbnailAndImage(user, name, images, meis, res, Meis, appendImagesAndThumbnails);
 	    }
 	}
     });
