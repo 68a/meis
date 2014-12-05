@@ -1,18 +1,19 @@
 'use strict';
 
-angular.module('mean.meis', ['angularFileUpload'])
+angular.module('mean.meis', ['angularFileUpload', 'ngDialog'])
     .controller(
 	'MeisController',
 	['$scope', '$http', '$stateParams',
 	 '$location','Global', 'Meis',
-	 'FileUploader', 'Mm',
-	 function($scope, $http, $stateParams, $location, Global, Meis, FileUploader, Mm) {
+	 'FileUploader', 'Mm', 'ngDialog',
+	 function($scope, $http, $stateParams, $location, Global, Meis, FileUploader, Mm, ngDialog) {
 	     $scope.global = Global;
 	     $scope.files = [];
 	     $scope.uploader = new FileUploader( {
 		 url: '/upload',
 		 method: 'POST'
 	     });
+	     
 	     $scope.uploader.onCompleteItem = function(fileItem, response, status, headers) {
 		 console.log(response);
 		 $scope.files.push(response[0][1].path);
@@ -41,7 +42,7 @@ angular.module('mean.meis', ['angularFileUpload'])
 			 error(function(data, status, headers, config) {
 			     console.log('error');
 			     $location.path('meis/list');	     
-			 });;
+			 });
 
 
 		 } else {
@@ -67,7 +68,7 @@ angular.module('mean.meis', ['angularFileUpload'])
 			     console.log('error');
 			     $location.path('meis/list');	     
 
-			 });;
+			 });
 
 		 } else {
 		     $scope.submitted = true;
@@ -113,9 +114,22 @@ angular.module('mean.meis', ['angularFileUpload'])
 			       $scope.meis = result;
 			       console.log('search result...',result);
 			   });
-	     }
+	     };
 	     $scope.showImage = function(img) {
-		 ngDialog.open({template: 'image_dialog.html'});
+		 $scope.img = img;
+		 ngDialog.open(
+		     {template: 'meis/views/image_dialog.html',
+		      className: 'ngdialog-theme-mei',
+		      scope: $scope
+		     }
+
+		 );
+/**		 
+		 ngDialog.open({
+		     template: '<p>my template</p>',
+		     plain: true
+		 });
+*/
 	     }
 	 }
 			 ]);

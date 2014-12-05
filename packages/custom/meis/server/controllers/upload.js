@@ -1,21 +1,11 @@
-var formidable = require('formidable'),
-    util = require('util');
+'use strict';
 
-//var  fs = require('fs');
-//var multiparty = require('multiparty');
+var formidable = require('formidable');
 
 var mongoose = require('mongoose');
-var TmpImages = mongoose.model('TmpImages');
-
-var fs = require('fs-extra');
 
 exports.postImage = function(req, res) {
     var form = new formidable.IncomingForm();
-    var user = req.user;
-
-    form.on('progress', function(bytesReceived, bytesExpected) {
-	console.log('progress...' + bytesReceived + ':' + bytesExpected);
-    });
 
     var files = [];
     var fields = [];
@@ -36,10 +26,7 @@ exports.postImage = function(req, res) {
 	    res.end(JSON.stringify(files));
 	});
 
-    form.parse(req, function(err, fileds, file) {
+    form.parse(req);
 
-	console.log(files[0][1].path);
-
-    });
 };			
 

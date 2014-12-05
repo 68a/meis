@@ -1,7 +1,10 @@
 {
   "core": {
     "css": {
-      "bower_components/build/css/dist.min.css": []
+	"bower_components/build/css/dist.min.css": [
+	    "bower_components/ngDialog/css/ngDialog.css",
+	    "bower_components/ngDialog/css/ngDialog-theme-default.css"
+	]
     },
     "js": {
       "bower_components/build/js/dist.min.js": [
@@ -13,7 +16,8 @@
         "bower_components/angular-ui-router/release/angular-ui-router.js",
         "bower_components/angular-bootstrap/ui-bootstrap.js",
           "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
-	  "bower_components/angular-file-upload/angular-file-upload.js"
+	  "bower_components/angular-file-upload/angular-file-upload.js",
+	  "bower_components/ngDialog/js/ngDialog.js"
       ]
     }
   }

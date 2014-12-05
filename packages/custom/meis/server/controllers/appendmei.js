@@ -1,6 +1,7 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var Meis = mongoose.model('Mei');
-var gm = require('gm').subClass({ imageMagick: true });
 var pt = require('./processthumb.js');
 
 var appendImagesAndThumbnails = function(name, meis, res, Meis) {
@@ -11,7 +12,7 @@ var appendImagesAndThumbnails = function(name, meis, res, Meis) {
 	}
 	else {
 	    res.sendStatus(200);
-	}
+	};
     });
     
 }
@@ -30,7 +31,7 @@ exports.appendMei = function(req, res) {
 	    var meis = new Meis(mei);
 	    meis.comments.posts.push({'user':user, 'comment': comment});
 
-	    if (images.length == 0) {
+	    if (images.length === 0) {
 		Meis.update({'name': name}, meis.toObject(), function(err) {
 		    if (err) res.sendStatus(500, err);
 		    else
@@ -40,7 +41,7 @@ exports.appendMei = function(req, res) {
 	    }
 	    else {
 		pt.processThumbnailAndImage(user, name, images, meis, res, Meis, appendImagesAndThumbnails);
-	    }
+	    };
 	}
     });
 }
