@@ -1,5 +1,5 @@
 <section data-ng-controller="MeisController" data-ng-init="find()">
-  <testdirective> aaa </testdirective>
+
   <ul class="unstyled">
     <li data-ng-repeat="mei in meis">
       <span>{{mei.created | date:'medium'}}</span> /
@@ -16,11 +16,7 @@
         </span>
       </h2>
       <div>{{mei.comments.posts[0].comment}}</div>
-     <div class="row"> 
-      <div class="col-md-2 thumbnail" ng-repeat="mi in mei.images.files">
-	<img src="data:image/png;base64,{{mi.image_thumb}}" ng-click="showImage(mi.image)"/>
-      </div>
-      </div>
+     <thumbnailsRow/>
     </li>
   </ul>
   <h1 data-ng-hide="!meis || meis.length">No meis yet. <br> Why don't you <a href="/#!/meis/create">Create One</a>?</h1>
