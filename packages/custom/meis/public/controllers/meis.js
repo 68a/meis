@@ -121,15 +121,6 @@ angular.module('mean.meis', ['angularFileUpload', 'ngDialog'])
 		     {template: 'meis/views/image_dialog.html',
 		      className: 'ngdialog-theme-mei',
 		      scope: $scope
-		     }
-
-		 );
-/**		 
-		 ngDialog.open({
-		     template: '<p>my template</p>',
-		     plain: true
-		 });
-*/
-	     }
-	 }
-			 ]);
+		     });
+	     };
+	 } ]);

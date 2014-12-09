@@ -37,8 +37,8 @@ angular
                 var canvas = element.find('canvas');
                 var reader = new FileReader();
 
-                reader.onload = onLoadFile;
-                reader.readAsDataURL(params.file);
+
+
 
                 function onLoadFile(event) {
                     var img = new Image();
@@ -47,11 +47,15 @@ angular
                 }
 
                 function onLoadImage() {
+		    /*jshint validthis: true */
                     var width = params.width || this.width / this.height * params.height;
                     var height = params.height || this.height / this.width * params.width;
                     canvas.attr({ width: width, height: height });
                     canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
                 }
+
+		reader.onload = onLoadFile;
+		reader.readAsDataURL(params.file);
             }
         };
     }]);

@@ -4,12 +4,12 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    crypto = require('crypto');
+    Schema = mongoose.Schema;
 
 /**
  * Validations
  */
+/*****
 var validatePresenceOf = function(value) {
     // If you are authenticating by any of the oauth strategies, don't validate.
     return (this.provider && this.provider !== 'local') || (value && value.length);
@@ -19,6 +19,7 @@ var validateUniqueEmail = function(value, callback) {
     var Mei = mongoose.model('Mei');
 
 };
+****/
 
 /**
  * Mei Schema

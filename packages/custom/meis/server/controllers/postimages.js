@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var Meis = mongoose.model('Mei');
 
@@ -14,8 +16,7 @@ var saveImagesAndThumbnails = function (name, meis, res, Meis) {
 	    res.sendStatus(200);
 	}
     });
-    
-}
+};
 
 exports.postImages = function(req, res) {
     var name = req.body.name;
@@ -27,7 +28,7 @@ exports.postImages = function(req, res) {
     meis.user = req.user;
 
     meis.comments.posts.push({'user':user, 'comment': comment});
-    if (images.length == 0) {
+    if (images.length === 0) {
 	meis.save(function(err) {
 	    if (err) {
 		res.sendStatus(500);

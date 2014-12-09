@@ -12,10 +12,10 @@ var appendImagesAndThumbnails = function(name, meis, res, Meis) {
 	}
 	else {
 	    res.sendStatus(200);
-	};
+	}
     });
     
-}
+};
 
 exports.appendMei = function(req, res) {
     var name = req.body.name;
@@ -41,7 +41,7 @@ exports.appendMei = function(req, res) {
 	    }
 	    else {
 		pt.processThumbnailAndImage(user, name, images, meis, res, Meis, appendImagesAndThumbnails);
-	    };
+	    }
 	}
     });
-}
+};

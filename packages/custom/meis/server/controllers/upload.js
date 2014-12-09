@@ -2,8 +2,6 @@
 
 var formidable = require('formidable');
 
-var mongoose = require('mongoose');
-
 exports.postImage = function(req, res) {
     var form = new formidable.IncomingForm();
 

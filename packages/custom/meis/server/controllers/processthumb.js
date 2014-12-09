@@ -1,3 +1,5 @@
+'use strict';
+
 // http://stackoverflow.com/questions/16222116/error-spawn-enoent-while-using-gm-in-node
 var gm = require('gm').subClass({ imageMagick: true });
 
@@ -8,48 +10,45 @@ exports.processThumbnailAndImage = function (user, name,  images, meis, res, Mei
 		if (a[key] > b[key]) return 1;
 		if (a[key] < b[key]) return -1;
 		return 0;
-	    }
+	    };
 	}
 
-	if (t.length == max_len && n.length == max_len) {
+	if (t.length === max_len && n.length === max_len) {
 	    t.sort(keysrt('index'));
 	    n.sort(keysrt('index'));
-	    for(var i = 0; i < max_len; i++) {
+	    for(var i = 0; i < max_len; i = i + 1) {
 		meis.images.files.push({'user':user, 'image': n[i].image, 'image_thumb': t[i].image});
 	    }
 	    func(name, meis, res, Meis);
 	}
-    }
+    };
     var normal_images = [];
     var thumbnails = [];
 
     var funcs = [];
 
-    for (var im in images) {
-	(function (idx, t, n) {
-	    console.log('idx:', idx);
-	    funcs.push(function() {
-		gm(images[idx])
-		    .size(function (err, data) {
-			if (!err) console.log(data)
-		    });
-		gm(images[idx]).resize(240, 240, '^')
-		     .gravity('Center')
-		    .crop('240', '240')
-		    .toBuffer(function (err, buffer) {
+    var tmpFunc = function (idx, t, n) {
+	console.log('idx:', idx);
+	funcs.push(function() {
+	    gm(images[idx]).resize(240, 240, '^')
+		.gravity('Center')
+		.crop('240', '240')
+		.toBuffer(function (err, buffer) {
 		    t.push({'index': idx, 'image': buffer});
 		    getThumbnailAndImage(images.length, idx, t, n, func);
 		});
-		gm(images[idx]).toBuffer(function(err, buffer){
-		    n.push({'index': idx, 'image': buffer});
-		    getThumbnailAndImage(images.length, idx, t, n, func);
-		});
+	    gm(images[idx]).toBuffer(function(err, buffer){
+		n.push({'index': idx, 'image': buffer});
+		getThumbnailAndImage(images.length, idx, t, n, func);
 	    });
-	    
-	})(im, thumbnails, normal_images);
+	});
+    };
+
+    for (var im in images) {
+	tmpFunc(im, thumbnails, normal_images);
     }
     for (var f in funcs) {
 	funcs[f]();
     }
     
-}
+};
