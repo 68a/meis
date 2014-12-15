@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.meis', ['angularFileUpload', 'ngDialog'])
+angular.module('mean.meis', ['angularFileUpload', 'ngDialog', 'infinite-scroll'])
     .controller(
 	'MeisController',
 	['$scope', '$http', '$stateParams',
@@ -13,17 +13,30 @@ angular.module('mean.meis', ['angularFileUpload', 'ngDialog'])
 		 url: '/upload',
 		 method: 'POST'
 	     });
+	     $scope.after = 0;
 	     
 	     $scope.uploader.onCompleteItem = function(fileItem, response, status, headers) {
-		 console.log(response);
 		 $scope.files.push(response[0][1].path);
              };
 
-	     $scope.hasAuthorization = function(article) {
-		 if (!article || !article.user) return false;
-		 return $scope.global.isAdmin || article.user._id === $scope.global.user._id;
+	     $scope.hasAuthorization = function(mei) {
+//		 console.log(mei.user);
+		 if (!mei || !mei.user) return false;
+		 return $scope.global.isAdmin || mei.user._id === $scope.global.user._id;
 	     };
 
+	     $scope.nextPage = function() {
+		 console.log('next page...');
+		 $scope.after = $scope.after + 1;
+		 console.log($scope.after);
+		 Meis.query({page: $scope.after, perPage: 4}, function(meis) {
+		     console.log('$scope.meis.len:', $scope.meis.length, 'meis.len:', meis.length);
+		     $scope.meis = $scope.meis.concat(meis);
+		     console.log('$scope.meis.len:', $scope.meis.length);
+		     
+		 });
+
+	     };
 	     $scope.create = function(isValid) {
 		 if (isValid) {
 
@@ -92,8 +105,8 @@ angular.module('mean.meis', ['angularFileUpload', 'ngDialog'])
 	     };
 
 	     $scope.find = function() {
-
-		 Meis.query(function(meis) {
+		 
+		 Meis.query({page: $scope.after, perPage: 4}, function(meis) {
 		     $scope.meis = meis;
 
 		 });

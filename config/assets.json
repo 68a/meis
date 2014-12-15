@@ -17,7 +17,8 @@
         "bower_components/angular-bootstrap/ui-bootstrap.js",
           "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
 	  "bower_components/angular-file-upload/angular-file-upload.js",
-	  "bower_components/ngDialog/js/ngDialog.js"
+	  "bower_components/ngDialog/js/ngDialog.js",
+	  "bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"
       ]
     }
   }

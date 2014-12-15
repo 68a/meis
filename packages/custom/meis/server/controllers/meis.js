@@ -21,6 +21,19 @@ exports.mei = function(req, res, next, id) {
   });
 };
 
+exports.nextPage = function(req, res, after) {
+/*
+    Mei.find(query, fields, {skip:10, limit:5}, function(err, meis) {
+	if (err) {
+	    return res.json(500, {
+		error: 'Cannot list the meis'
+	    });
+	}
+	res.json(meis);
+    });
+*/
+};
+	    
 /**
  * Create an mei
  */
@@ -87,7 +100,10 @@ exports.show = function(req, res) {
  * List of Meis
  */
 exports.all = function(req, res) {
-  Mei.find().sort('-created').populate('user', 'name username').exec(function(err, meis) {
+    var page = req.query.page;
+    var perPage = req.query.perPage;
+    console.log(page, perPage);
+    Mei.find().sort('-created').skip(page * perPage).limit(perPage).populate('user', 'name username').exec(function(err, meis) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the meis'
