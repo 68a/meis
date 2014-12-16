@@ -93,7 +93,7 @@
 }
 
 .ngdialog.ngdialog-theme-mei .ngdialog-buttons {
-  *zoom: 1;
+  zoom: 1;
 }
 
 .ngdialog.ngdialog-theme-mei .ngdialog-buttons:after {

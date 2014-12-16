@@ -73,6 +73,7 @@
     // Custom Globals
     "globals": {
       "angular"     : true,
+      "jasmine"	    : true,
       "define"      : false,
       "require"     : false,
       "exports"     : false,
