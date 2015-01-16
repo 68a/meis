@@ -1,6 +1,6 @@
 <div class="row" > 
       <div class="col-md-2 thumbnail" ng-repeat="mi in mei.images.files">
-	<img src="data:image/png;base64,{{mi.image_thumb}}" ng-click="showImage(mi.image)"/>
+	<img src="data:image/png;base64,{{mi.image_thumb}}" ng-click="showImage(mi.image, mi.image_name);"/>
       </div>
 </div>
 

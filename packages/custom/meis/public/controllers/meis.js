@@ -4,7 +4,7 @@ angular.module('mean.meis', ['angularFileUpload', 'ngDialog', 'infinite-scroll']
     .controller(
 	'MeisController',
 	['$scope', '$http', '$stateParams',
-	 '$location','Global', 'Meis',
+	 '$location', 'Global', 'Meis',
 	 'FileUploader', 'Mm', 'ngDialog',
 	 function($scope, $http, $stateParams, $location, Global, Meis, FileUploader, Mm, ngDialog) {
 	     $scope.global = Global;
@@ -20,7 +20,7 @@ angular.module('mean.meis', ['angularFileUpload', 'ngDialog', 'infinite-scroll']
              };
 
 	     $scope.hasAuthorization = function(mei) {
-//		 console.log(mei.user);
+		 console.log(mei.user);
 		 if (!mei || !mei.user) return false;
 		 return $scope.global.isAdmin || mei.user._id === $scope.global.user._id;
 	     };
@@ -43,6 +43,8 @@ angular.module('mean.meis', ['angularFileUpload', 'ngDialog', 'infinite-scroll']
 		     var meis =
 			 {
 			     'name': $scope.name,
+			     'im': $scope.im,
+			     'cover_image': $scope.files[0],
 			     'images': $scope.files,
 			     'comment': $scope.comment,
 			     'user': $scope.global.user.name
@@ -67,7 +69,11 @@ angular.module('mean.meis', ['angularFileUpload', 'ngDialog', 'infinite-scroll']
 
 		     var meis =
 			 {
+			     '_id': $scope.mei._id,
 			     'name': $scope.mei.name,
+			     'cover_image': $scope.files[0],
+			     'im': $scope.mei.im,
+			     'mobile': $scope.mei.mobile,
 			     'images': $scope.files,
 			     'comment': $scope.comment,
 			     'user': $scope.global.user.name
@@ -113,11 +119,14 @@ angular.module('mean.meis', ['angularFileUpload', 'ngDialog', 'infinite-scroll']
 	     };
 
 	     $scope.findOne = function() {
-		 console.log($stateParams.meiId);
+		 console.log('findOne:', $stateParams.meiId);
 		 Meis.get({
 		     meiId: $stateParams.meiId
 		 }, function(mei) {
 		     $scope.mei = mei;
+		     $scope.editState = true;
+
+		     console.log(mei);
 		 });
 	     };
 	     $scope.search = function() {
@@ -128,12 +137,31 @@ angular.module('mean.meis', ['angularFileUpload', 'ngDialog', 'infinite-scroll']
 			       console.log('search result...',result);
 			   });
 	     };
-	     $scope.showImage = function(img) {
+	     $scope.showImage = function(img, img_name) {
 		 $scope.img = img;
-		 ngDialog.open(
+		 $scope.currentImageName = img_name;
+		 console.log('img_name:', img_name);
+		 $scope.imgDlg = ngDialog.open(
 		     {template: 'meis/views/image_dialog.html',
 		      className: 'ngdialog-theme-mei',
 		      scope: $scope
 		     });
 	     };
+	     $scope.deleteOneImage = function(id) {
+		 console.log('click delete btn : ', $scope.currentImageName, id);
+		 $http.post('/delimage', {'_id': id, 'image_name': $scope.currentImageName}). success(function(data, status, headers, config) {
+		     console.log('success');
+		     ngDialog.close($scope.imgDlg);
+		     $location.path('meis/'+id+'/edit');
+		     window.location.reload();
+
+		 }).
+		     error(function(data, status, headers, config) {
+			 console.log('error');
+			 ngDialog.close($scope.imgDlg);
+			 $location.path('meis/list');	     
+
+		     });
+	     };
+
 	 } ]);

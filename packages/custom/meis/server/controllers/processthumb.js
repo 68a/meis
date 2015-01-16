@@ -1,4 +1,5 @@
 'use strict';
+var crypto = require('crypto');
 
 // http://stackoverflow.com/questions/16222116/error-spawn-enoent-while-using-gm-in-node
 var gm = require('gm').subClass({ imageMagick: true });
@@ -17,7 +18,8 @@ exports.processThumbnailAndImage = function (user, name,  images, meis, res, Mei
 	    t.sort(keysrt('index'));
 	    n.sort(keysrt('index'));
 	    for(var i = 0; i < max_len; i = i + 1) {
-		meis.images.files.push({'user':user, 'image': n[i].image, 'image_thumb': t[i].image});
+		var imageName = crypto.createHash('md5').update(t[i].image).digest('hex');
+		meis.images.files.push({'user':user, 'image': n[i].image, 'image_thumb': t[i].image, 'image_name': imageName});
 	    }
 	    func(name, meis, res, Meis);
 	}

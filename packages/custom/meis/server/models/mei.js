@@ -35,6 +35,18 @@ var MeiSchema = new Schema({
 	unique: true,
 	required: true
     },
+    cover_image: {
+	type: Buffer
+    },
+    im: {
+	type: String
+    },
+    mobile: {
+	type: String
+    },
+    gallery_password: {
+	type: String
+    },
     images: {
 	files: []
     },

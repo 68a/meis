@@ -1,6 +1,13 @@
 <section data-ng-controller="MeisController">
+  <!--
   <div style="{MARGIN: auto;WIDTH: 450px;}" >
     <img style="MAX-WIDTH: 100%!important;HEIGHT: auto!important;width:expression(this.width > 450 ? “450px” : this.width)!important;" src="data:image/png;base64,{{img}}" />
+    	<a class="ghost-button" href="http://sixrevisions.com/css/ghost-buttons/">View Tutorial</a>
   </div>
+-->
+  <div style="HEIGHT:400px; WIDTH: 400px;background-image:url(data:image/png;base64,{{img}}); background-repeat:no-repeat; background-size:100% ;">
+    	<button ng-hide="!editState" style="position: absolute; bottom:25px; left:25px;" class="ghost-button" ng-click="deleteOneImage(mei._id);">Delete</button>
+  </div>
+
 </section>
 
